@@ -1,0 +1,69 @@
+{
+  "name": "testProject",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "precommit": "lint-staged && flow",
+    "flow": "flow",
+    "format": "import-sort -l --write '*.js' 'src/**/*.js'; prettier-eslint --write '*.js' 'src/**/*.js'",
+    "lint": "eslint 'src/*/*.js' 'src/*/src/**/*.js'",
+    "test": "jest"
+  },
+  "dependencies": {
+    "appcenter": "^1.5.1",
+    "appcenter-analytics": "^1.5.1",
+    "appcenter-crashes": "^1.5.1",
+    "json-format": "^1.0.1",
+    "react": "16.2.0",
+    "react-native": "0.53.3",
+    "react-native-vector-icons": "^4.4.2",
+    "react-redux": "~4.4.5",
+    "redux": "~3.5.2",
+    "redux-thunk": "~2.1.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "22.4.1",
+    "eslint": "^4.18.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.6.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "flow-bin": "^0.62.0",
+    "husky": "^0.14.3",
+    "jest": "22.4.2",
+    "react-test-renderer": "16.2.0",
+    "lint-staged": "^6.1.1",
+    "prettier-eslint-cli": "^4.7.1"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.js": [
+        "eslint",
+        "prettier-eslint --list-different"
+      ]
+    },
+    "ignore": [
+      "flow-typed/**"
+    ]
+  },
+  "importSort": {
+    ".js, .es": {
+      "parser": "babylon",
+      "style": "module"
+    }
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "jest": {
+    "preset": "react-native",
+    "setupFiles": [
+      "<rootDir>/node_modules/appcenter/test/AppCenterMock.js",
+      "<rootDir>/node_modules/appcenter-crashes/test/AppCenterCrashesMock.js",
+      "<rootDir>/node_modules/appcenter-analytics/test/AppCenterAnalyticsMock.js"
+    ]
+  }
+}
