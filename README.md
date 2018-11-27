@@ -28,7 +28,7 @@ NOTE: if you attempt to commit now you may run into flow issues that will be fix
 In order to get set up quickly with an easy to understand files structure and have redux set up in your app please copy the following files from this project to yours. In some cases, you may need to open the files and just copy the content. Especially with hidden files. 
 - copy flow-typed
 - create .eslintrc.json and copy contents of .eslintrc.json
-- copy contents of .flowconfig
+- copy contents of .flowconfig, and .bablerc
 - delete App.js
 - open index.js and change line `import App from './App'` to be `import App from './src/App'`
 - copy src directory
