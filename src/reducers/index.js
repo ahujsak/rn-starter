@@ -1,7 +1,13 @@
-import { combineReducers } from 'redux'
+// @flow
+import { type Reducer, combineReducers } from 'redux'
 
-const rootReducer = combineReducers({
-  state: (state = {}) => state
+import { type Action } from '../types/ReduxTypes.js'
+import { MeReducer as Me, type MeState } from './MeReducer'
+
+export type RootState = {
+  +Me: MeState
+}
+
+export const rootReducer: Reducer<RootState, Action> = combineReducers({
+  Me
 })
-
-export default rootReducer

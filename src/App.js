@@ -1,17 +1,22 @@
 // @flow
 
 import React, { Component } from 'react'
-import { createStore, applyMiddleware } from 'redux'
+import { YellowBox } from 'react-native'
 import { Provider } from 'react-redux'
-import reducers from './reducers'
+import { applyMiddleware, createStore } from 'redux'
+import thunk from 'redux-thunk'
+
 import Main from './components/scenes/MainSceneComponent'
-const createStoreWithMiddleware = applyMiddleware()(createStore)
+import { rootReducer } from './reducers'
+
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 
 type Props = {}
 export default class App extends Component<Props> {
   render () {
+    YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader'])
     return (
-      <Provider store={createStoreWithMiddleware(reducers)}>
+      <Provider store={createStoreWithMiddleware(rootReducer)}>
         <Main />
       </Provider>
     )

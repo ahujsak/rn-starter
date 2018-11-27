@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "precommit": "lint-staged && flow",
+    "precommit": "npm run localize && lint-staged && npm run lint && npm run flow && npm test",
+    "localize": "node ./localizeLanguage.js; git add ./src/locales/strings",
     "flow": "flow",
     "format": "import-sort -l --write '*.js' 'src/**/*.js'; prettier-eslint --write '*.js' 'src/**/*.js'",
     "lint": "eslint 'src/*/*.js' 'src/*/src/**/*.js'",
@@ -16,37 +17,41 @@
     "json-format": "^1.0.1",
     "react": "16.2.0",
     "react-native": "0.53.3",
+    "react-native-router-flux": "4.0.5",
     "react-native-vector-icons": "^4.4.2",
     "react-redux": "~4.4.5",
     "redux": "~3.5.2",
-    "redux-thunk": "~2.1.0"
+    "redux-thunk": "~2.1.0",
+    "rfc4648": "1.1.0",
+    "sprintf-js": "^1.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "babel-jest": "22.4.1",
     "eslint": "^4.18.0",
     "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^6.0.0",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-react": "^7.6.1",
+    "eslint-plugin-react-native": "^3.0.1",
     "eslint-plugin-standard": "^3.0.1",
     "flow-bin": "^0.62.0",
     "husky": "^0.14.3",
+    "import-sort-cli": "^5.0.0",
+    "import-sort-parser-babylon": "^5.0.0",
+    "import-sort-style-module": "^5.0.0",
     "jest": "22.4.2",
     "react-test-renderer": "16.2.0",
     "lint-staged": "^6.1.1",
     "prettier-eslint-cli": "^4.7.1"
   },
   "lint-staged": {
-    "linters": {
-      "*.js": [
-        "eslint",
-        "prettier-eslint --list-different"
-      ]
-    },
-    "ignore": [
-      "flow-typed/**"
+    "*.js": [
+      "import-sort -l --write",
+      "prettier-eslint --write",
+      "git add"
     ]
   },
   "importSort": {
@@ -54,6 +59,9 @@
       "parser": "babylon",
       "style": "module"
     }
+  },
+  "prettier": {
+    "printWidth": 160
   },
   "workspaces": [
     "packages/*"
